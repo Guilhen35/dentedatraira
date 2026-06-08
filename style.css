@@ -1,0 +1,753 @@
+/* =============================================
+   🎨 DENTE DA TRAÍRA - ESTILOS CSS
+   Arquivo: style.css
+   ============================================= */
+
+/* ---- VARIÁVEIS DE COR ---- */
+:root{
+  --bg:#04100f;
+  --bg-2:#07191a;
+  --surface:#0c2226;
+  --surface-2:#103035;
+  --line:rgba(255,255,255,.08);
+  --text:#e7f3f1;
+  --muted:#8aa3a3;
+  --aqua:#1fe3c2;
+  --gold:#f0b53d;
+  --radius:18px;
+  --maxw:1200px;
+}
+
+/* ---- RESET GERAL ---- */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05;font-weight:700;}
+
+/* ---- CURSOR PERSONALIZADO (Anzol) ---- */
+
+/* Esconde o cursor padrão do sistema em todo o site */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* O cursor é um <div> criado pelo JavaScript */
+.cursor {
+  position: fixed;          /* fica sempre visível na tela */
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;     /* não interfere com cliques */
+  z-index: 9999;            /* fica acima de tudo */
+  transform: translate(-50%, -50%); /* centraliza no ponteiro */
+  transition: transform .1s ease, opacity .2s ease;
+  /* A posição real é controlada pelo JS */
+  will-change: left, top;   /* dica ao browser para animar melhor */
+}
+
+/* Quando passa em cima de link ou botão — cresce um pouco */
+.cursor.hover {
+  transform: translate(-50%, -50%) scale(1.4);
+}
+
+/* Quando clica — encolhe */
+.cursor.click {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Some quando o mouse sai da janela */
+.cursor.hidden {
+  opacity: 0;
+}
+
+
+/* ---- LAYOUT ---- */
+.wrap{width:min(92%,var(--maxw));margin-inline:auto;}
+.kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--aqua);font-weight:700;margin-bottom:1rem;}
+.kicker::before{content:'';width:28px;height:2px;background:var(--aqua);display:inline-block;}
+
+/* ---- FUNDO ANIMADO ---- */
+.ocean{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:radial-gradient(900px 600px at 80% -10%,rgba(31,227,194,.10),transparent 60%),
+  radial-gradient(700px 500px at 0% 30%,rgba(240,181,61,.06),transparent 55%),var(--bg);
+  animation:drift 24s ease-in-out infinite alternate;}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(-3%,2%)}}
+
+
+/* ---- HEADER ---- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  /* Fundo transparente por padrão — fica sobre o hero */
+}
+
+/* Barra interna: logo à esquerda, menu à direita */
+header .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0; /* ← tamanho fixo, nunca encolhe */
+  width: min(92%, var(--maxw));
+  margin-inline: auto;
+  transition: background .35s ease, border-color .35s ease;
+}
+
+/* Ao rolar: fundo escuro fosco aparece — mas o tamanho não muda */
+header.scrolled .bar {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px); /* Safari */
+  background: rgba(4,16,15,.82);
+  border-bottom: 1px solid var(--line);
+  padding: 1.1rem min(4%, calc((100vw - var(--maxw)) / 2));
+}
+
+/* ---- LOGO ---- */
+.logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -.02em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.logo span { color: var(--aqua); } /* o ponto verde */
+
+/* ---- MENU DE NAVEGAÇÃO ---- */
+nav.menu {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+/* Links do menu */
+nav.menu a {
+  font-size: .88rem;
+  color: var(--muted);
+  font-weight: 600;
+  transition: color .2s;
+  position: relative;
+  white-space: nowrap;
+}
+nav.menu a:hover { color: var(--text); }
+
+/* Sublinhado animado ao hover */
+nav.menu a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 2px;
+  width: 0;
+  background: var(--aqua);
+  transition: width .25s;
+}
+nav.menu a:hover::after { width: 100%; }
+
+/* Botão "Fale comigo" — destaque verde */
+nav.menu a.btn {
+  background: var(--aqua);
+  color: #04100f;
+  padding: .55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .85rem;
+  border: none;
+  transition: transform .2s, box-shadow .2s;
+}
+nav.menu a.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(31,227,194,.35);
+  color: #04100f;
+}
+/* Remove o sublinhado do botão */
+nav.menu a.btn::after { display: none; }
+
+/* ---- BOTÕES ---- */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:999px;font-weight:700;font-size:.9rem;background:var(--aqua);color:#04100f;transition:.25s;border:none;cursor:pointer;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(31,227,194,.3);}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);}
+.btn.ghost:hover{border-color:var(--aqua);box-shadow:none;}
+
+/* ---- HAMBURGER MOBILE ---- */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;}
+.burger span{width:26px;height:2px;background:var(--text);transition:.3s;}
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 5rem;
+  overflow: hidden; /* evita scroll horizontal das partículas */
+}
+
+/* Grid de 2 colunas: texto | foto */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Coluna do texto */
+.hero-content { position: relative; z-index: 1; }
+
+/* Título grande */
+.hero h1 {
+  font-size: clamp(3rem, 9vw, 7rem);
+  letter-spacing: -.03em;
+  margin: .5rem 0 1.2rem;
+}
+
+/* Degradê no "Dente da Traíra" */
+.hero h1 .grad {
+  background: linear-gradient(120deg, var(--aqua), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Parágrafo descritivo */
+.hero p.lead {
+  color: var(--muted);
+  font-size: 1.15rem;
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+
+/* Linha de botões */
+.hero .cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Lista de bullets */
+.hero-points {
+  list-style: none;
+  margin-top: 2.5rem;
+  display: grid;
+  gap: .8rem;
+}
+.hero-points li {
+  display: flex;
+  gap: .7rem;
+  align-items: flex-start;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.hero-points li::before {
+  content: '›';
+  color: var(--aqua);
+  font-weight: 800;
+}
+
+/* ---- MINI STATS (abaixo dos bullets) ---- */
+/* Bloco que mostra 3 números rápidos: total de seguidores, plataformas, ano */
+.hero-mini-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  width: fit-content;
+}
+.mini-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+}
+.mini-stat b {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.4rem;
+  color: var(--aqua);
+  font-weight: 800;
+  line-height: 1;
+}
+.mini-stat small {
+  color: var(--muted);
+  font-size: .72rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+/* Separador vertical entre os stats */
+.mini-stat-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--line);
+}
+
+/* ---- FOTO DO HERO ---- */
+.hero-photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(31,227,194,.15) 0%, rgba(240,181,61,.1) 100%);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+}
+
+/* ---- BADGE FLUTUANTE (seguidores) ---- */
+.float-badge {
+  position: absolute;
+  bottom: 1.2rem;
+  left: -1rem;          /* fica um pouco pra fora da foto */
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: .9rem 1.1rem;
+  backdrop-filter: blur(8px);
+  /* Animação de entrada: desliza da esquerda */
+  animation: badgeIn .8s .5s both;
+}
+@keyframes badgeIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.float-badge b {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.4rem;
+  color: var(--aqua);
+  display: block;
+}
+.float-badge small {
+  color: var(--muted);
+  font-size: .72rem;
+  letter-spacing: .05em;
+}
+
+/* ---- LIVE DOT (indicador "canal ativo") ---- */
+.live-dot {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(4,16,15,.7);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .4rem .8rem;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text);
+  backdrop-filter: blur(8px);
+  letter-spacing: .04em;
+}
+/* Bolinha verde pulsando dentro do live-dot */
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.7); }
+}
+
+/* ---- PARTÍCULAS DECORATIVAS ---- */
+/* Container fixo que cobre toda a seção hero */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* não interfere com cliques */
+  z-index: 0;
+  overflow: hidden;
+}
+/* Cada <span> é uma bolinha circular flutuante */
+.hero-particles span {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--aqua);
+  opacity: .06;       /* bem sutil para não distrair */
+  animation: floatUp 12s infinite linear;
+  bottom: -20%;       /* começa abaixo da tela */
+}
+/* Tamanhos, posições e tempos diferentes para cada bolinha */
+.hero-particles span:nth-child(1) { width:80px;  height:80px;  left:10%; animation-delay:0s;   animation-duration:14s; }
+.hero-particles span:nth-child(2) { width:40px;  height:40px;  left:25%; animation-delay:3s;   animation-duration:10s; }
+.hero-particles span:nth-child(3) { width:120px; height:120px; left:60%; animation-delay:1.5s; animation-duration:18s; }
+.hero-particles span:nth-child(4) { width:30px;  height:30px;  left:75%; animation-delay:5s;   animation-duration:12s; }
+.hero-particles span:nth-child(5) { width:60px;  height:60px;  left:40%; animation-delay:7s;   animation-duration:16s; }
+.hero-particles span:nth-child(6) { width:20px;  height:20px;  left:85%; animation-delay:2s;   animation-duration:9s;  }
+
+/* As bolinhas sobem de baixo para cima e somem */
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) scale(.8); opacity: 0; }
+  10%  { opacity: .06; }
+  90%  { opacity: .06; }
+  100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+}
+
+/* ---- INDICADOR DE SCROLL ---- */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  color: var(--muted);
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity .5s;
+  pointer-events: none;
+}
+/* Classe adicionada pelo JS quando o usuário rola a página */
+.scroll-hint.hidden {
+  opacity: 0;
+}
+/* Seta animada para baixo */
+.arrow-down {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid var(--aqua);
+  border-bottom: 2px solid var(--aqua);
+  transform: rotate(45deg);
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(5px); }
+}
+
+/* ---- SEÇÕES ---- */
+section{padding:6.5rem 0;position:relative;}
+section.alt{background:var(--bg-2);}
+.section-head{max-width:640px;margin-bottom:3rem;}
+.section-head h2{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.02em;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+
+/* ---- MÉTRICAS ---- */
+
+/* Cabeçalho da seção centralizado */
+#metricas .section-head {
+  text-align: center;
+  margin-inline: auto;
+  margin-bottom: 3rem;
+}
+#metricas .section-head .kicker {
+  justify-content: center; /* centraliza o kicker com a barrinha */
+}
+
+/* Grid dos cards — 3 colunas centralizadas */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 260px));
+  gap: 1.5rem;
+  margin-top: 1rem;
+  justify-content: center; /* ← centraliza o grupo de cards */
+}
+
+/* Card individual */
+.metric-card {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.2rem 1.5rem;
+  text-align: center;
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho que passa ao hover */
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(31,227,194,.08), transparent);
+  transition: left .6s;
+  pointer-events: none;
+}
+.metric-card:hover::before { left: 100%; }
+.metric-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--aqua);
+  background: var(--surface-2);
+  box-shadow: 0 12px 40px rgba(31,227,194,.15);
+}
+
+/* Ícone SVG — caixa quadrada com fundo sutil */
+.metric-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(31,227,194,.08);
+  border-radius: 18px;
+  margin-bottom: 1.4rem;
+  transition: transform .3s;
+}
+.metric-card:hover .metric-icon { transform: scale(1.1) rotate(-3deg); }
+
+/* Número grande */
+.metric-number {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 2.8rem;
+  color: var(--aqua);
+  font-weight: 800;
+  margin-bottom: .3rem;
+  line-height: 1;
+}
+
+.metric-label {
+  color: var(--muted);
+  font-size: .88rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+
+.metric-platform {
+  color: var(--text);
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+/* Card TOTAL — destaque especial */
+.metric-card.total {
+  grid-column: 1 / -1;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(31,227,194,.12), rgba(240,181,61,.06));
+  border: 1.5px solid var(--aqua);
+  padding: 3rem 2rem;
+  flex-direction: row;          /* ícone + número lado a lado */
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 0 60px rgba(31,227,194,.08);
+}
+
+/* Lado esquerdo: ícone do globo */
+.metric-card.total .metric-icon {
+  width: 90px;
+  height: 90px;
+  background: rgba(31,227,194,.15);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-bottom: 0; /* remove margem que era pro layout vertical */
+}
+
+/* Lado direito: textos empilhados */
+.metric-card.total .metric-texts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .3rem;
+}
+
+.metric-card.total .metric-number {
+  font-size: 4.5rem;
+  line-height: 1;
+  background: linear-gradient(120deg, var(--aqua), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;           /* número com degradê aqua → dourado */
+}
+
+.metric-card.total .metric-label {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.metric-card.total .metric-platform {
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 800;
+}
+
+/* Linha brilhante no topo do card total */
+.metric-card.total::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--aqua), transparent);
+  border-radius: 999px;
+}
+
+/* Mobile: volta pra layout vertical */
+@media (max-width: 560px) {
+  .metric-card.total {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .metric-card.total .metric-texts { align-items: center; }
+  .metric-card.total .metric-number { font-size: 3.2rem; }
+}
+
+.metric-card.total .metric-number {
+  font-size: 3.8rem;
+}
+.metric-card.total .metric-icon {
+  background: rgba(31,227,194,.12);
+  border-radius: 50%; /* ícone do globo fica redondo */
+}
+
+/* ---- RESPONSIVO ---- */
+@media (max-width: 900px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr); /* mantém 3 colunas no tablet */
+  }
+}
+@media (max-width: 560px) {
+  .metrics-grid {
+    grid-template-columns: 1fr; /* 1 coluna no mobile */
+  }
+  .metric-card.total { max-width: 100%; }
+}
+
+
+/* ---- CARDS ---- */
+.cards{display:grid;gap:1.4rem;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.8rem;transition:.3s;}
+.card:hover{transform:translateY(-6px);border-color:rgba(31,227,194,.35);background:var(--surface-2);}
+.card h3{font-size:1.25rem;margin-bottom:.6rem;}
+.card p{color:var(--muted);font-size:.95rem;}
+.card .icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(31,227,194,.12);color:var(--aqua);margin-bottom:1.1rem;font-size:1.4rem;}
+
+/* ---- GALERIA ---- */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;}
+.gallery .tile{aspect-ratio:1;border-radius:14px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(31,227,194,.1),rgba(240,181,61,.06));display:grid;place-items:center;color:var(--text);font-size:2rem;text-align:center;padding:.5rem;transition:.3s;font-weight:600;}
+.gallery .tile:hover{transform:scale(1.05);border-color:var(--aqua);}
+
+/* ---- PARCEIROS ---- */
+.sponsors{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;}
+.sponsor{flex:1 1 220px;max-width:260px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:2rem;text-align:center;transition:.3s;}
+.sponsor:hover{transform:translateY(-5px);border-color:var(--gold);}
+.sponsor .badge{width:64px;height:64px;margin:0 auto 1rem;border-radius:16px;display:grid;place-items:center;background:rgba(240,181,61,.12);color:var(--gold);font-size:1.6rem;font-weight:800;}
+
+/* ---- Logo dos parceiros (imagem real) ---- */
+.logo-box {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;        /* deixa a foto redonda, igual Instagram */
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 20px rgba(240,181,61,.2);
+  background: #fff;          /* fundo branco caso a logo tenha transparência */
+}
+
+.logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* preenche o círculo sem distorcer */
+  display: block;
+}
+
+
+/* ---- LOJA ---- */
+.affiliates{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.aff-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.3s;display:flex;flex-direction:column;}
+.aff-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 50px rgba(0,0,0,.4);}
+.aff-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,rgba(31,227,194,.12),rgba(240,181,61,.08));display:grid;place-items:center;color:var(--gold);font-size:3rem;font-weight:600;}
+.aff-body{padding:1.4rem;display:flex;flex-direction:column;gap:.5rem;flex:1;}
+.aff-body .tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--aqua);font-weight:700;}
+.aff-body h3{font-size:1.15rem;}
+.aff-body p{color:var(--muted);font-size:.9rem;flex:1;}
+.aff-link{margin-top:.6rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--gold);font-weight:700;font-size:.92rem;}
+.aff-link::after{content:'→';transition:.25s;}
+.aff-card:hover .aff-link::after{transform:translateX(5px);}
+
+/* ---- VÍDEOS ---- */
+.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.video-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.video-frame{aspect-ratio:9/16;background:#000;}
+.video-frame iframe,.video-frame blockquote{width:100%!important;height:100%!important;border:0;margin:0!important;}
+.video-meta{padding:1rem 1.2rem;}
+.video-meta .tag{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--gold);}
+.video-meta h3{font-size:1.05rem;margin-top:.3rem;}
+
+/* ---- DESENVOLVIDO POR ---- */
+.dev-section{text-align:center;}
+.dev-logo-big{width:120px;height:120px;margin:0 auto 2rem;border-radius:50%;overflow:hidden;border:2px solid var(--aqua);box-shadow:0 10px 40px rgba(31,227,194,.3);}
+.dev-logo-big img{width:100%;height:100%;object-fit:cover;}
+.dev-info{max-width:700px;margin:0 auto;}
+.dev-info h2{font-size:clamp(2.2rem,6vw,3.6rem);margin-bottom:1.5rem;}
+.dev-info p{color:var(--muted);font-size:1.05rem;margin-bottom:1.5rem;line-height:1.7;}
+.dev-services{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2.5rem 0;}
+.dev-service{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.8rem;transition:.3s;}
+.dev-service:hover{transform:translateY(-5px);border-color:var(--aqua);background:var(--surface-2);}
+.dev-service .icon{font-size:2rem;margin-bottom:1rem;}
+.dev-service h3{font-size:1.1rem;margin-bottom:.5rem;}
+.dev-service p{color:var(--muted);font-size:.9rem;}
+.dev-contact{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.dev-contact a{padding:.8rem 1.5rem;border:1px solid var(--aqua);border-radius:999px;font-weight:700;font-size:.9rem;transition:.3s;}
+.dev-contact a:first-child{background:var(--aqua);color:#04100f;}
+.dev-contact a:first-child:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(31,227,194,.3);}
+.dev-contact a:not(:first-child){color:var(--aqua);}
+.dev-contact a:not(:first-child):hover{background:rgba(31,227,194,.1);transform:translateY(-2px);}
+
+/* ---- CONTATO ---- */
+.contact{text-align:center;}
+.contact .big{font-size:clamp(2.2rem,6vw,4.5rem);letter-spacing:-.02em;margin-bottom:1.5rem;}
+.socials{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
+.socials a{padding:.8rem 1.4rem;border:1px solid var(--line);border-radius:999px;font-weight:600;transition:.25s;}
+.socials a:hover{border-color:var(--aqua);color:var(--aqua);}
+
+/* ---- FOOTER ---- */
+footer{padding:3rem 0;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.85rem;}
+
+/* ---- ANIMAÇÕES ---- */
+.reveal{opacity:0;transform:translateY(36px);transition:.8s cubic-bezier(.2,.7,.2,1);}
+.reveal.show{opacity:1;transform:none;}
+
+/* ---- RESPONSIVO ---- */
+@media(max-width:900px){
+  nav.menu{position:fixed;inset:0 0 0 30%;flex-direction:column;justify-content:center;background:rgba(4,16,15,.96);backdrop-filter:blur(20px);padding:2rem;transform:translateX(100%);transition:.35s;gap:2rem;}
+  nav.menu.open{transform:none;}
+  nav.menu a{font-size:1.2rem;}
+  .burger{display:flex;z-index:60;}
+
+  /* Hero: empilha foto abaixo do texto */
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo { aspect-ratio: 4/3; }
+  .float-badge { left: .5rem; }
+
+  /* Mini stats vira linha com wrap */
+  .hero-mini-stats { flex-wrap: wrap; width: 100%; justify-content: center; }
+
+  .about-grid{grid-template-columns:1fr;}
+  .grid-3,.affiliates,.videos{grid-template-columns:repeat(2,1fr);}
+  .gallery{grid-template-columns:repeat(2,1fr);}
+  .dev-services{grid-template-columns:1fr;}
+  .metric-card.total{grid-column:1/-1;}
+}
+@media(max-width:560px){
+  .grid-3,.affiliates,.videos,.metrics-grid{grid-template-columns:1fr;}
+  section{padding:4.5rem 0;}
+  .scroll-hint { display: none; } /* esconde a seta no mobile pequeno */
+}

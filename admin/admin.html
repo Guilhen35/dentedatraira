@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · Dente da Traíra</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#e7f3f1;padding:20px;min-height:100vh;}
+    .container{max-width:1100px;margin:0 auto;}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;border-bottom:2px solid #1fe3c2;padding-bottom:20px;flex-wrap:wrap;gap:12px;}
+    h1{font-size:1.8rem;color:#1fe3c2;}
+    .header-btns{display:flex;gap:10px;}
+    .btn-voltar{background:#f0b53d;color:#1a1a1a;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.3s;}
+    .btn-voltar:hover{background:#e0a32d;transform:translateY(-2px);}
+    .btn-logout{background:#ff6b6b;color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:700;transition:.3s;}
+    .btn-logout:hover{background:#ff5252;transform:translateY(-2px);}
+    .card{background:#2a2a2a;border:2px solid #1fe3c2;border-radius:12px;padding:28px;margin-bottom:24px;}
+    .card h2{color:#1fe3c2;margin-bottom:18px;font-size:1.3rem;}
+    .info{background:rgba(31,227,194,.1);border-left:4px solid #1fe3c2;padding:12px 16px;margin-bottom:18px;border-radius:6px;font-size:.9rem;color:#1fe3c2;}
+    .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;}
+    label{display:block;margin-bottom:6px;font-weight:700;color:#1fe3c2;font-size:.9rem;}
+    input{width:100%;padding:11px;background:#1a1a1a;border:2px solid #1fe3c2;color:#e7f3f1;border-radius:6px;font-size:1rem;transition:.3s;}
+    input:focus{outline:none;border-color:#f0b53d;box-shadow:0 0 10px rgba(31,227,194,.2);}
+    .rede-box{background:#1a1a1a;border:2px solid #0c2226;border-radius:8px;padding:14px;margin-bottom:14px;}
+    .rede-box h3{color:#1fe3c2;margin-bottom:12px;font-size:1rem;}
+    .btn-salvar{width:100%;padding:14px;background:#1fe3c2;color:#1a1a1a;border:none;border-radius:8px;font-weight:700;font-size:1.1rem;cursor:pointer;transition:.3s;margin-top:8px;}
+    .btn-salvar:hover{background:#0dd5b6;transform:translateY(-2px);box-shadow:0 5px 15px rgba(31,227,194,.3);}
+    .sucesso{background:#1fe3c2;color:#1a1a1a;padding:14px;border-radius:8px;font-weight:700;margin-bottom:16px;display:none;animation:fadeIn .3s ease;}
+    .sucesso.show{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center;z-index:100;}
+    .modal.show{display:flex;}
+    .modal-box{background:#2a2a2a;padding:32px;border-radius:12px;border:2px solid #1fe3c2;max-width:380px;width:90%;}
+    .modal-box h2{color:#1fe3c2;margin-bottom:20px;}
+    .modal-box p{color:#8aa3a3;font-size:.85rem;text-align:center;margin-top:10px;}
+    @media(max-width:680px){.row{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>🎣 Painel Admin — Dente da Traíra</h1>
+    <div class="header-btns">
+      <a href="../index.html" class="btn-voltar">← Voltar ao Site</a>
+      <button class="btn-logout" onclick="logout()">Sair</button>
+    </div>
+  </header>
+
+  <!-- MODAL LOGIN -->
+  <div class="modal show" id="modalLogin">
+    <div class="modal-box">
+      <h2>🔐 Entrar no Admin</h2>
+      <div style="margin-bottom:16px;">
+        <label>Senha:</label>
+        <input type="password" id="senhaInput" placeholder="Digite a senha" autofocus />
+      </div>
+      <button class="btn-salvar" onclick="login()">Entrar</button>
+      <p>Senha padrão: <strong>admin123</strong></p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO ADMIN -->
+  <div id="conteudo" style="display:none;">
+
+    <!-- MÉTRICAS -->
+    <div class="card">
+      <h2>📊 Métricas — Redes Sociais</h2>
+      <div class="info">💡 Edite os números e clique em Salvar. O site atualiza automaticamente!</div>
+      <div class="sucesso" id="msg">✅ Salvo com sucesso!</div>
+
+      <div class="rede-box">
+        <h3>📸 Instagram</h3>
+        <div class="row">
+          <div><label>Seguidores</label><input type="number" id="ig-num" value="363000" /></div>
+          <div><label>Emoji</label><input type="text" id="ig-icon" value="📸" maxlength="2" /></div>
+          <div><label>Label</label><input type="text" id="ig-label" value="Seguidores" /></div>
+        </div>
+      </div>
+
+      <div class="rede-box">
+        <h3>📺 YouTube</h3>
+        <div class="row">
+          <div><label>Inscritos</label><input type="number" id="yt-num" value="202000" /></div>
+          <div><label>Emoji</label><input type="text" id="yt-icon" value="📺" maxlength="2" /></div>
+          <div><label>Label</label><input type="text" id="yt-label" value="Inscritos" /></div>
+        </div>
+      </div>
+
+      <div class="rede-box">
+        <h3>🎵 TikTok</h3>
+        <div class="row">
+          <div><label>Seguidores</label><input type="number" id="tt-num" value="923500" /></div>
+          <div><label>Emoji</label><input type="text" id="tt-icon" value="🎵" maxlength="2" /></div>
+          <div><label>Label</label><input type="text" id="tt-label" value="Seguidores" /></div>
+        </div>
+      </div>
+
+      <button class="btn-salvar" onclick="salvarMetricas()">💾 Salvar Métricas</button>
+    </div>
+
+    <!-- PARCEIROS (em breve) -->
+    <div class="card">
+      <h2>🤝 Parceiros</h2>
+      <div class="info">🔧 Em breve: adicionar e editar parceiros aqui!</div>
+    </div>
+
+    <!-- LOJA (em breve) -->
+    <div class="card">
+      <h2>🛍️ Loja</h2>
+      <div class="info">🔧 Em breve: adicionar e editar produtos aqui!</div>
+    </div>
+
+    <!-- VÍDEOS (em breve) -->
+    <div class="card">
+      <h2>🎬 Vídeos</h2>
+      <div class="info">🔧 Em breve: adicionar e editar vídeos aqui!</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const SENHA = 'admin123';
+
+  function login() {
+    if (document.getElementById('senhaInput').value === SENHA) {
+      localStorage.setItem('adminOk', '1');
+      document.getElementById('modalLogin').classList.remove('show');
+      document.getElementById('conteudo').style.display = 'block';
+      carregarValores();
+    } else {
+      alert('❌ Senha incorreta!');
+      document.getElementById('senhaInput').value = '';
+      document.getElementById('senhaInput').focus();
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('adminOk');
+    location.reload();
+  }
+
+  document.getElementById('senhaInput').addEventListener('keypress', e => {
+    if (e.key === 'Enter') login();
+  });
+
+  window.addEventListener('load', () => {
+    if (localStorage.getItem('adminOk') === '1') {
+      document.getElementById('modalLogin').classList.remove('show');
+      document.getElementById('conteudo').style.display = 'block';
+      carregarValores();
+    }
+  });
+
+  function carregarValores() {
+    const salvo = localStorage.getItem('redeSocial');
+    if (!salvo) return;
+    const redes = JSON.parse(salvo);
+    if (redes[0]) { document.getElementById('ig-num').value = redes[0].numero; document.getElementById('ig-icon').value = redes[0].icon; document.getElementById('ig-label').value = redes[0].label; }
+    if (redes[1]) { document.getElementById('yt-num').value = redes[1].numero; document.getElementById('yt-icon').value = redes[1].icon; document.getElementById('yt-label').value = redes[1].label; }
+    if (redes[2]) { document.getElementById('tt-num').value = redes[2].numero; document.getElementById('tt-icon').value = redes[2].icon; document.getElementById('tt-label').value = redes[2].label; }
+  }
+
+  function salvarMetricas() {
+    const redes = [
+      { icon: document.getElementById('ig-icon').value, numero: parseInt(document.getElementById('ig-num').value), label: document.getElementById('ig-label').value, plataforma: 'Instagram', link: 'https://www.instagram.com/dentedatraira/' },
+      { icon: document.getElementById('yt-icon').value, numero: parseInt(document.getElementById('yt-num').value), label: document.getElementById('yt-label').value, plataforma: 'YouTube',   link: 'https://www.youtube.com/@dentedatraira' },
+      { icon: document.getElementById('tt-icon').value, numero: parseInt(document.getElementById('tt-num').value), label: document.getElementById('tt-label').value, plataforma: 'TikTok',    link: 'https://www.tiktok.com/@matheusalexandre_' }
+    ];
+    localStorage.setItem('redeSocial', JSON.stringify(redes));
+    const msg = document.getElementById('msg');
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>

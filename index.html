@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dente da Traíra · Matheus Alexandre — Pesca Esportiva</title>
+
+  <!-- 🔤 Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- 🎨 CSS do site -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 🌊 Fundo animado -->
+  <div class="ocean"></div>
+
+  <!-- ==========================================
+       📍 HEADER - Barra de navegação fixa
+       ========================================== -->
+  <header id="topo">
+    <div class="bar wrap">
+      <a href="#topo" class="logo">Dente<span>.</span>daTraíra</a>
+      <nav class="menu" id="menu">
+        <a href="#sobre">História</a>
+        <a href="#metricas">Métricas</a>
+        <a href="#time">Time</a>
+        <a href="#criadouro">Criadouro</a>
+        <a href="#parceiros">Parceiros</a>
+        <a href="#loja">Loja</a>
+        <a href="#videos">Vídeos</a>
+        <a href="#desenvolvido">Desenvolvido Por</a>
+        <a href="#contato" class="btn">Fale comigo</a>
+        
+      </nav>
+      <button class="burger" id="burger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       🎯 HERO - Seção principal (MELHORADO)
+       ========================================== -->
+  <section class="hero wrap" id="inicio">
+
+    <!-- 🌊 Partículas decorativas de fundo (bolinhas flutuantes) -->
+    <div class="hero-particles" aria-hidden="true">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="hero-grid">
+
+      <!-- 📝 COLUNA ESQUERDA: texto, título, botões -->
+      <div class="hero-content">
+
+        <!-- 🏷️ Kicker: tag pequena acima do título -->
+        <span class="kicker reveal">Maior criador de pesca do Paraná</span>
+
+        <!-- 📌 Título principal -->
+        <h1 class="reveal">
+          Matheus<br>
+          Alexandre<br>
+          <span class="grad">Dente da Traíra</span>
+        </h1>
+
+        <!-- 📄 Parágrafo de descrição -->
+        <p class="lead reveal">
+          Criador de conteúdo em pesca esportiva com audiência altamente engajada
+          e foco em resultado real para marcas que valorizam autenticidade e autoridade.
+        </p>
+
+        <!-- 🔘 Botões de ação -->
+        <div class="cta-row reveal">
+          <a href="#contato" class="btn">🤝 Quero uma parceria</a>
+          <a href="#sobre" class="btn ghost">Conhecer a história →</a>
+        </div>
+
+        <!-- ✅ Bullets de diferenciais -->
+        <ul class="hero-points reveal">
+          <li>Base em Curitiba · viagens por todo o Brasil</li>
+          <li>Especialista em Pirarara, Tucunaré e pesca pesada</li>
+          <li>Vivência real: criação, manejo e prática contínua</li>
+        </ul>
+
+        <!-- 📊 Mini métricas rápidas abaixo dos bullets -->
+        <div class="hero-mini-stats reveal">
+          <div class="mini-stat">
+            <b id="hero-total">1,4 M+</b>
+            <small>seguidores totais</small>
+          </div>
+          <div class="mini-stat-sep"></div>
+          <div class="mini-stat">
+            <b>3</b>
+            <small>plataformas</small>
+          </div>
+          <div class="mini-stat-sep"></div>
+          <div class="mini-stat">
+            <b>2023</b>
+            <small>início do canal</small>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 🖼️ COLUNA DIREITA: foto + badge flutuante -->
+      <div class="hero-photo reveal">
+
+        <!-- Foto do Matheus -->
+        <img src="assets/perfil.png" alt="Matheus Alexandre — Dente da Traíra" />
+
+        <!-- 🏅 Badge de seguidores (canto inferior esquerdo) -->
+        <div class="float-badge">
+          <b id="hero-badge-num">363 mil</b>
+          <small>SEGUIDORES NO INSTAGRAM</small>
+        </div>
+
+        <!-- 🟢 Indicador de canal ativo (canto superior direito) -->
+        <div class="live-dot" aria-label="Canal ativo">
+          <span class="pulse"></span>
+          Canal ativo
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⬇️ Indicador de scroll (some ao rolar) -->
+    <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+      <span>Role para baixo</span>
+      <div class="arrow-down"></div>
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       📖 SOBRE - História
+       ========================================== -->
+  <section id="sobre" class="alt">
+    <div class="wrap about-grid">
+      <div>
+        <img src="assets/peixegrande.png" alt="Pirarara" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+      </div>
+      <div class="reveal">
+        <span class="kicker">Da curiosidade à autoridade</span>
+        <h2 style="font-size:clamp(2rem,4.5vw,3rem);margin-bottom:1.5rem;">A história</h2>
+        <p>Me chamo <strong>Matheus Alexandre</strong>, conhecido como <strong>Dente da Traíra</strong>. Comecei na internet em <strong>novembro de 2023</strong> sem pretensão comercial — apenas compartilhando a rotina de criação de peixes em casa.</p>
+        <br>
+        <p>Essa autenticidade atraiu um público apaixonado por <strong>pesca esportiva</strong>, criando uma audiência extremamente engajada e fiel. Hoje, produzo conteúdo prático, visual e repetível.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       📊 MÉTRICAS - Instagram, YouTube, TikTok
+       ========================================== -->
+  <section id="metricas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Alcance comprovado</span>
+        <h2>Presença em múltiplas plataformas</h2>
+      </div>
+      <!-- Cards preenchidos pelo script.js -->
+      <div class="metrics-grid" id="metrics-container"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       👥 TIME - Equipe
+       ========================================== -->
+  <section id="time" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Quem está junto</span>
+        <h2>O time de pesca</h2>
+      </div>
+      <div class="cards grid-3">
+        <div class="card reveal"><div class="icon">🎣</div><h3>Matheus Alexandre</h3><p>Fundador, pescador e criador de todo o conteúdo.</p></div>
+        <div class="card reveal"><div class="icon">🎥</div><h3>Captação & Edição</h3><p>Responsáveis por transformar cada expedição em conteúdo visual.</p></div>
+        <div class="card reveal"><div class="icon">🐟</div><h3>Manejo & Criadouro</h3><p>Cuidado diário com as espécies — alimentação e saúde.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       🐠 CRIADOURO - Galeria
+       ========================================== -->
+  <section id="criadouro">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">O lugar onde tudo vive</span>
+        <h2>Um ecossistema vivo com 38+ espécies</h2>
+      </div>
+      <div class="gallery">
+        <img src="assets/pacugrande.png" alt="Pacu" style="border-radius:14px;width:100%;height:100%;object-fit:cover;" class="reveal" />
+        <div class="tile reveal">🐟 Pirarara</div>
+        <div class="tile reveal">🎣 Tucunaré</div>
+        <div class="tile reveal">🐡 Tanque 01</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       🤝 PARCEIROS - Patrocinadores
+       ========================================== -->
+  <section id="parceiros" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-inline:auto;text-align:center;">
+        <span class="kicker" style="justify-content:center;">Marcas que constroem o futuro conosco</span>
+        <h2>Parceiros</h2>
+      </div>
+      <!-- Preenchido pelo script.js -->
+      <div class="sponsors" id="lista-patrocinadores"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       🛍️ LOJA - Afiliados
+       ========================================== -->
+  <section id="loja">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Equipamentos que eu uso e recomendo</span>
+        <h2>A loja do Dente</h2>
+      </div>
+      <!-- Preenchido pelo script.js -->
+      <div class="affiliates" id="lista-afiliados"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       🎬 VÍDEOS - Instagram Embeds
+       ========================================== -->
+  <section id="videos" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">Promoções & Sorteios</span>
+        <h2>Vídeos em destaque</h2>
+      </div>
+      <!-- Preenchido pelo script.js -->
+      <div class="videos" id="lista-videos"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       🏗️ DESENVOLVIDO POR - Agência
+       ========================================== -->
+  <section id="desenvolvido">
+    <div class="wrap dev-section">
+      <div class="dev-logo-big reveal">
+        <img src="assets/lithuan-logo.png" alt="Lithuan Studio" />
+      </div>
+      <div class="dev-info reveal">
+        <span class="kicker" style="justify-content:center;">Inovação Digital</span>
+        <h2>Lithuan Studio</h2>
+        <p>Somos uma agência de desenvolvimento digital focada em criar experiências incríveis que transformam ideias em realidade.</p>
+      </div>
+      <div class="dev-services reveal">
+        <div class="dev-service"><div class="icon">💻</div><h3>Web Design</h3><p>Sites modernos e responsivos.</p></div>
+        <div class="dev-service"><div class="icon">📱</div><h3>Frontend</h3><p>Interfaces incríveis com React e Vue.</p></div>
+        <div class="dev-service"><div class="icon">⚙️</div><h3>Backend</h3><p>APIs robustas com Node.js.</p></div>
+      </div>
+      <div class="dev-contact reveal">
+        <a href="https://instagram.com/lithuan.studio" target="_blank">📱 @lithuan.studio</a>
+        <a href="https://github.com/lithuan" target="_blank">🐙 GitHub</a>
+        <a href="mailto:contato@lithuan.studio">✉️ Contato</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       📞 CONTATO - CTA Final
+       ========================================== -->
+  <section id="contato" class="alt">
+    <div class="wrap contact">
+      <span class="kicker reveal" style="justify-content:center;">Vamos construir algo grande</span>
+      <h2 class="big reveal">Bora fechar parceria?</h2>
+      <p class="reveal" style="color:var(--muted);max-width:50ch;margin:0 auto;">Não se trata só de visibilidade — é impacto.</p>
+      <div class="reveal" style="margin-top:2rem;">
+        <a href="mailto:matheusalealves@gmail.com" class="btn">matheusalealves@gmail.com</a>
+      </div>
+      <div class="socials reveal">
+        <a href="https://www.instagram.com/dentedatraira/" target="_blank">Instagram</a>
+        <a href="https://www.youtube.com/@dentedatraira" target="_blank">YouTube</a>
+        <a href="https://www.tiktok.com/@matheusalexandre_" target="_blank">TikTok</a>
+        <a href="mailto:matheusalealves@gmail.com">E-mail</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔗 FOOTER -->
+  <footer>
+    <div class="wrap">© <span id="ano"></span> Dente da Traíra · Desenvolvido por <strong>Lithuan Studio</strong></div>
+  </footer>
+
+  <!-- ⚙️ JavaScript do site -->
+  <script src="script.js"></script>
+
+</body>
+</html>
