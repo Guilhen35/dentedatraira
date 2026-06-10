@@ -1,60 +1,26 @@
 /* =============================================
    ⚙️ DENTE DA TRAÍRA - JAVASCRIPT
-   Arquivo: script.js
    ============================================= */
 
 // ---- ANO NO FOOTER ----
 document.getElementById('ano').textContent = new Date().getFullYear();
 
-// =============================================
-// 🪝 CURSOR PERSONALIZADO — Anzol
-// =============================================
-
-// 1. Cria o elemento <div class="cursor"> e injeta o SVG do anzol dentro
-const cursor = document.createElement('div');
-cursor.classList.add('cursor');
-
-// SVG do anzol desenhado à mão com coordenadas
-// Você pode mudar a cor trocando os valores de stroke e fill abaixo
-cursor.innerHTML = `
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Haste vertical do anzol -->
-    <line x1="16" y1="2" x2="16" y2="18" stroke="#1fe3c2" stroke-width="2.2" stroke-linecap="round"/>
-    <!-- Curva do anzol (arco) -->
-    <path d="M16 18 Q26 18 26 26 Q26 31 20 31" stroke="#1fe3c2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-    <!-- Ponta do anzol (farpinha) -->
-    <path d="M20 31 L17 27" stroke="#1fe3c2" stroke-width="2" stroke-linecap="round"/>
-    <!-- Olhal (argola no topo) -->
-    <circle cx="16" cy="2" r="2.5" stroke="#f0b53d" stroke-width="2" fill="none"/>
-  </svg>
-`;
-
-// 2. Adiciona o cursor no final do body
-document.body.appendChild(cursor);
-
-// 3. Faz o cursor seguir o mouse
-document.addEventListener('mousemove', (e) => {
-  // Posiciona o div exatamente onde o mouse está
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top  = e.clientY + 'px';
-  cursor.classList.remove('hidden');
+// ---- MODAL DESENVOLVIDO POR ----
+function abrirDevSection(e) {
+  e.preventDefault();
+  document.getElementById('devModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // fecha o menu mobile se estiver aberto
+  document.getElementById('menu').classList.remove('open');
+}
+function fecharDevSection() {
+  document.getElementById('devModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Fecha com ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') fecharDevSection();
 });
-
-// 4. Some quando o mouse sai da janela do navegador
-document.addEventListener('mouseleave', () => cursor.classList.add('hidden'));
-document.addEventListener('mouseenter', () => cursor.classList.remove('hidden'));
-
-// 5. Efeito de clique: encolhe o anzol por 150ms
-document.addEventListener('mousedown', () => cursor.classList.add('click'));
-document.addEventListener('mouseup',   () => cursor.classList.remove('click'));
-
-// 6. Cresce quando passa em cima de links, botões e coisas clicáveis
-const clicaveis = 'a, button, .btn, .card, .sponsor, .aff-card, .metric-card';
-document.querySelectorAll(clicaveis).forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-});
-
 
 // ---- MENU MOBILE ----
 const burger = document.getElementById('burger');
@@ -68,7 +34,7 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// ---- ANIMAÇÃO REVEAL (aparecer ao entrar na tela) ----
+// ---- ANIMAÇÃO REVEAL ----
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); }
@@ -78,31 +44,33 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // =============================================
 // 📊 MÉTRICAS DAS REDES SOCIAIS
-// Para editar os números, mude aqui embaixo
-// Ou use o Painel Admin em /admin/admin.html
+// Para editar os números use o Painel Admin em /admin/admin.html
 // =============================================
 function carregarMetricas() {
   const salvo = localStorage.getItem('redeSocial');
   return salvo ? JSON.parse(salvo) : [
     {
-      icon: '📸',
-      numero: 363000,       // ← INSTAGRAM: mude aqui
-      label: 'Seguidores',
       plataforma: 'Instagram',
+      numero: 363000,
+      label: 'Seguidores',
       link: 'https://www.instagram.com/dentedatraira/'
     },
     {
-      icon: '📺',
-      numero: 202000,       // ← YOUTUBE: mude aqui
-      label: 'Inscritos',
+      plataforma: 'Facebook',
+      numero: 872,
+      label: 'Seguidores',
+      link: 'https://www.facebook.com/dentedatraira'
+    },
+    {
       plataforma: 'YouTube',
+      numero: 200000,
+      label: 'Inscritos',
       link: 'https://www.youtube.com/@dentedatraira'
     },
     {
-      icon: '🎵',
-      numero: 923500,       // ← TIKTOK: mude aqui
-      label: 'Seguidores',
       plataforma: 'TikTok',
+      numero: 229000,
+      label: 'Seguidores',
       link: 'https://www.tiktok.com/@dentedatraira'
     }
   ];
@@ -111,12 +79,9 @@ function carregarMetricas() {
 function formatarNumero(n) {
   if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.', ',') + ' M';
   if (n >= 1000)    return (n / 1000).toFixed(0) + ' k';
-  return n.toString();
+  return n.toLocaleString('pt-BR');
 }
 
-
-// Ícones SVG reais de cada rede social
-// São os logos oficiais desenhados em SVG puro — sem precisar de imagem externa
 const ICONES = {
   Instagram: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none">
     <defs>
@@ -131,6 +96,11 @@ const ICONES = {
     <rect x="2" y="2" width="20" height="20" rx="6" stroke="url(#ig)" stroke-width="2" fill="none"/>
     <circle cx="12" cy="12" r="4.5" stroke="url(#ig)" stroke-width="2" fill="none"/>
     <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+  </svg>`,
+
+  Facebook: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+    <rect x="2" y="2" width="20" height="20" rx="6" fill="#1877f2"/>
+    <path d="M13 21v-7h2.5l.5-3H13V9.5c0-.83.42-1.5 1.5-1.5H16V5.5S15.2 5 14 5c-2.2 0-3.5 1.3-3.5 3.5V11H8v3h2.5v7H13z" fill="white"/>
   </svg>`,
 
   YouTube: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none">
@@ -159,11 +129,10 @@ function renderMetricas() {
   const container = document.getElementById('metrics-container');
   if (!container) return;
 
-  // Cada card das redes sociais
   const cardsRedes = redes.map(r => `
     <a href="${r.link}" target="_blank" style="text-decoration:none;color:inherit;">
       <div class="metric-card reveal">
-        <div class="metric-icon">${ICONES[r.plataforma] || r.icon}</div>
+        <div class="metric-icon">${ICONES[r.plataforma] || ''}</div>
         <div class="metric-number">${formatarNumero(r.numero)}</div>
         <div class="metric-label">${r.label}</div>
         <div class="metric-platform">${r.plataforma}</div>
@@ -171,13 +140,14 @@ function renderMetricas() {
     </a>
   `).join('');
 
-  // Card total separado na segunda linha
   const cardTotal = `
     <div class="metric-card total reveal">
       <div class="metric-icon">${ICONES.Total}</div>
-      <div class="metric-number">${formatarNumero(total)}</div>
-      <div class="metric-label">Seguidores Totais</div>
-      <div class="metric-platform">Todas as Plataformas</div>
+      <div class="metric-texts">
+        <div class="metric-number">${formatarNumero(total)}</div>
+        <div class="metric-label">Seguidores Totais</div>
+        <div class="metric-platform">Todas as Plataformas</div>
+      </div>
     </div>
   `;
 
@@ -186,114 +156,136 @@ function renderMetricas() {
 }
 renderMetricas();
 
-
-
-// =============================================
-// 🎯 HERO — atualizações dinâmicas
-// =============================================
-
-// Esconde a seta "Role para baixo" quando o usuário rolar a página
-const scrollHint = document.getElementById('scrollHint');
-if (scrollHint) {
-  window.addEventListener('scroll', () => {
-    // Se rolou mais de 100px, adiciona a classe "hidden" que some a seta (CSS cuida do resto)
-    scrollHint.classList.toggle('hidden', window.scrollY > 100);
-  }, { passive: true }); // passive: true = melhor performance, não bloqueia o scroll
-}
-
-// Atualiza o badge de seguidores e o total nos mini stats do Hero
-// com os mesmos dados que já existem no Admin (localStorage)
+// ---- HERO BADGE ----
 function atualizarHeroBadge() {
-  const redes = carregarMetricas(); // reusa a função que já existe acima
-
-  // Badge da foto: pega o número do Instagram (primeiro item do array)
+  const redes = carregarMetricas();
   const instagramNum = redes[0]?.numero || 363000;
-  // O ?. é "optional chaining" — evita erro se redes[0] for undefined
   const badgeEl = document.getElementById('hero-badge-num');
   if (badgeEl) badgeEl.textContent = formatarNumero(instagramNum);
-
-  // Mini stat "total": soma todos os seguidores de todas as redes
   const total = redes.reduce((soma, r) => soma + r.numero, 0);
-  // reduce() percorre o array somando os números — como um Σ matemático
   const totalEl = document.getElementById('hero-total');
   if (totalEl) totalEl.textContent = formatarNumero(total) + '+';
 }
-atualizarHeroBadge(); // chama na hora que a página carrega
+atualizarHeroBadge();
+
+// ---- SCROLL HINT ----
+const scrollHint = document.getElementById('scrollHint');
+if (scrollHint) {
+  window.addEventListener('scroll', () => {
+    scrollHint.classList.toggle('hidden', window.scrollY > 100);
+  }, { passive: true });
+}
 
 // =============================================
 // 🤝 PARCEIROS
-// Para adicionar: copie um bloco e mude os dados
 // =============================================
-// DEPOIS (usando imagem real da marca)
 const PATROCINADORES = [
   {
     nome: 'Koi Fishing Wear',
-    logo: 'assets/koi-logo.png',      // ← caminho da imagem que você salvou
+    logo: 'assets/koi-logo.png',
     link: 'https://www.instagram.com/koifishingwear/'
   },
   {
     nome: 'Albatroz Fishing',
-    logo: 'assets/albatroz-logo.png', // ← caminho da imagem que você salvou
+    logo: 'assets/albatroz-logo.png',
     link: 'https://www.instagram.com/albatrozfishing/'
   }
 ];
 
 document.getElementById('lista-patrocinadores').innerHTML = PATROCINADORES.map(p =>
   '<a class="sponsor reveal" href="' + p.link + '" target="_blank">' +
-  // A div .badge virou .logo-box com a imagem dentro
-  '<div class="logo-box">' +
-  '<img src="' + p.logo + '" alt="Logo ' + p.nome + '" />' +
-  '</div>' +
+  '<div class="logo-box"><img src="' + p.logo + '" alt="Logo ' + p.nome + '" /></div>' +
   '<h3>' + p.nome + '</h3></a>'
 ).join('');
 
 // =============================================
-// 🛍️ LOJA (Afiliados)
-// Para adicionar: copie um bloco e mude os dados
+// 🛍️ LOJA — carregada do Admin (localStorage)
 // =============================================
-const AFILIADOS = [
-  { tag: 'Vestuário',   titulo: 'Camiseta UV Koi', desc: 'Proteção solar UV50+', emoji: '👕', link: 'https://www.instagram.com/koifishingwear/' },
-  { tag: 'Equipamento', titulo: 'Vara Albatroz',   desc: 'Vara de ação pesada',  emoji: '🎣', link: 'https://www.instagram.com/albatrozfishing/' },
-  { tag: 'Acessório',   titulo: 'Kit de Iscas',    desc: 'Seleção testada',      emoji: '🪝', link: '#' }
-];
+function carregarAfiliados() {
+  var salvo = localStorage.getItem('lojaProdutos');
+  return salvo ? JSON.parse(salvo) : [
+    { tag: 'Vestuário',   titulo: 'Camiseta UV Koi', desc: 'Proteção solar UV50+', emoji: '👕', link: 'https://www.instagram.com/koifishingwear/' },
+    { tag: 'Equipamento', titulo: 'Vara Albatroz',   desc: 'Vara de ação pesada',  emoji: '🎣', link: 'https://www.instagram.com/albatrozfishing/' },
+    { tag: 'Acessório',   titulo: 'Kit de Iscas',    desc: 'Seleção testada',      emoji: '🪝', link: '#' }
+  ];
+}
 
-document.getElementById('lista-afiliados').innerHTML = AFILIADOS.map(a =>
-  '<a class="aff-card reveal" href="' + a.link + '" target="_blank">' +
-  '<div class="aff-thumb">' + a.emoji + '</div>' +
-  '<div class="aff-body">' +
-  '<span class="tag">' + a.tag + '</span>' +
-  '<h3>' + a.titulo + '</h3>' +
-  '<p>' + a.desc + '</p>' +
-  '<span class="aff-link">Comprar agora</span>' +
-  '</div></a>'
-).join('');
+function renderLoja() {
+  var lista = carregarAfiliados();
+  var container = document.getElementById('lista-afiliados');
+  if (!container) return;
+
+  if (lista.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = lista.map(function(a) {
+    return '<a class="aff-card reveal" href="' + a.link + '" target="_blank" rel="noopener">' +
+      '<div class="aff-thumb">' + (a.emoji || '🎣') + '</div>' +
+      '<div class="aff-body">' +
+        '<span class="tag">' + a.tag + '</span>' +
+        '<h3>' + a.titulo + '</h3>' +
+        '<p>' + a.desc + '</p>' +
+        '<span class="aff-link">Comprar agora</span>' +
+      '</div></a>';
+  }).join('');
+
+  container.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+}
+renderLoja();
 
 // =============================================
-// 🎬 VÍDEOS
-// Para adicionar: copie um bloco e mude os dados
+// 🎬 VÍDEOS — carregados do Admin (localStorage)
 // =============================================
-const VIDEOS = [
-  { tag: 'Sorteio',  titulo: 'Sorteio de vara nova', url: 'https://www.instagram.com/dentedatraira/' },
-  { tag: 'Promoção', titulo: 'Cupom dos parceiros',  url: 'https://www.instagram.com/dentedatraira/' },
-  { tag: 'Destaque', titulo: 'Pirarara gigante',     url: 'https://www.instagram.com/dentedatraira/' }
-];
+function carregarVideos() {
+  var salvo = localStorage.getItem('videosDestaque');
+  return salvo ? JSON.parse(salvo) : [
+    { secao: 'Sorteio',  titulo: 'Sorteio de vara nova', url: 'https://www.instagram.com/reel/exemplo1/' },
+    { secao: 'Promoção', titulo: 'Cupom dos parceiros',  url: 'https://www.instagram.com/reel/exemplo2/' },
+    { secao: 'Destaque', titulo: 'Pirarara gigante',     url: 'https://www.instagram.com/reel/exemplo3/' }
+  ];
+}
 
-document.getElementById('lista-videos').innerHTML = VIDEOS.map(v =>
-  '<div class="video-card reveal">' +
-  '<div class="video-frame">' +
-  '<blockquote class="instagram-media" data-instgrm-permalink="' + v.url + '" data-instgrm-version="14"></blockquote>' +
-  '</div>' +
-  '<div class="video-meta">' +
-  '<span class="tag">' + v.tag + '</span>' +
-  '<h3>' + v.titulo + '</h3>' +
-  '</div></div>'
-).join('');
+function renderVideos() {
+  var videos = carregarVideos();
+  var container = document.getElementById('lista-videos');
+  if (!container) return;
 
-// Carregar script do Instagram
-const igScript = document.createElement('script');
-igScript.src = 'https://www.instagram.com/embed.js';
-igScript.async = true;
-document.body.appendChild(igScript);
+  // Garante que o link seja da post/reel direto (sem query strings)
+  function limparUrl(url) {
+    return url.split('?')[0].replace(/\/$/, '') + '/';
+  }
 
-// Observar novos elementos criados dinamicamente pelo JS
-document.querySelectorAll('.sponsor.reveal,.aff-card.reveal,.video-card.reveal').forEach(el => obs.observe(el));
+  container.innerHTML = videos.map(function(v) {
+    var urlLimpa = limparUrl(v.url);
+    return '<a class="video-card reveal" href="' + urlLimpa + '" target="_blank" rel="noopener">' +
+      '<div class="video-frame">' +
+        '<blockquote class="instagram-media"' +
+          ' data-instgrm-permalink="' + urlLimpa + '"' +
+          ' data-instgrm-version="14"' +
+          ' style="margin:0!important;width:100%!important;">' +
+        '</blockquote>' +
+      '</div>' +
+      '<div class="video-meta">' +
+        '<span class="tag">' + v.secao + '</span>' +
+        '<h3>' + v.titulo + '</h3>' +
+      '</div>' +
+    '</a>';
+  }).join('');
+
+  // Recarrega o embed do Instagram nos novos elementos
+  if (window.instgrm) {
+    window.instgrm.Embeds.process();
+  } else {
+    var igScript = document.createElement('script');
+    igScript.src = 'https://www.instagram.com/embed.js';
+    igScript.async = true;
+    document.body.appendChild(igScript);
+  }
+
+  container.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+}
+renderVideos();
+
+document.querySelectorAll('.sponsor.reveal,.aff-card.reveal').forEach(el => obs.observe(el));

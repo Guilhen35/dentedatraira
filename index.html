@@ -32,7 +32,7 @@
         <a href="#parceiros">Parceiros</a>
         <a href="#loja">Loja</a>
         <a href="#videos">Vídeos</a>
-        <a href="#desenvolvido">Desenvolvido Por</a>
+        <a href="#" onclick="abrirDevSection(event)">Desenvolvido Por</a>
         <a href="#contato" class="btn">Fale comigo</a>
         
       </nav>
@@ -246,31 +246,6 @@
   </section>
 
   <!-- ==========================================
-       🏗️ DESENVOLVIDO POR - Agência
-       ========================================== -->
-  <section id="desenvolvido">
-    <div class="wrap dev-section">
-      <div class="dev-logo-big reveal">
-        <img src="assets/lithuan-logo.png" alt="Lithuan Studio" />
-      </div>
-      <div class="dev-info reveal">
-        <span class="kicker" style="justify-content:center;">Inovação Digital</span>
-        <h2>Lithuan Studio</h2>
-        <p>Somos uma agência de desenvolvimento digital focada em criar experiências incríveis que transformam ideias em realidade.</p>
-      </div>
-      <div class="dev-services reveal">
-        <div class="dev-service"><div class="icon">💻</div><h3>Web Design</h3><p>Sites modernos e responsivos.</p></div>
-        <div class="dev-service"><div class="icon">📱</div><h3>Frontend</h3><p>Interfaces incríveis com React e Vue.</p></div>
-        <div class="dev-service"><div class="icon">⚙️</div><h3>Backend</h3><p>APIs robustas com Node.js.</p></div>
-      </div>
-      <div class="dev-contact reveal">
-        <a href="https://www.instagram.com/lithuanstudio/" target="_blank">📱 @lithuan.studio</a>
-        <a href="https://www.lithuanstudio.com.br/" target="_blank">🌐 lithuan.studio</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
        📞 CONTATO - CTA Final
        ========================================== -->
   <section id="contato" class="alt">
@@ -290,9 +265,63 @@
     </div>
   </section>
 
+  <!-- ==========================================
+       🏗️ DESENVOLVIDO POR — abre só ao clicar no menu
+       ========================================== -->
+  <div id="devModal" class="dev-modal" aria-hidden="true">
+    <div class="dev-modal-overlay" onclick="fecharDevSection()"></div>
+    <div class="dev-modal-panel">
+      <button class="dev-modal-close" onclick="fecharDevSection()" aria-label="Fechar">✕</button>
+      <div class="dev-modal-body">
+        <div class="dev-logo-big">
+          <img src="assets/lithuan-logo.png" alt="Lithuan Studio" />
+        </div>
+        <div class="dev-info">
+          <span class="kicker" style="justify-content:center;">Inovação Digital</span>
+          <h2>Lithuan Studio</h2>
+          <p>Somos uma agência de desenvolvimento digital focada em criar experiências incríveis que transformam ideias em realidade.</p>
+        </div>
+        <div class="dev-services">
+          <div class="dev-service"><div class="icon">💻</div><h3>Web Design</h3><p>Sites modernos e responsivos.</p></div>
+          <div class="dev-service"><div class="icon">📱</div><h3>Frontend</h3><p>Interfaces incríveis com React e Vue.</p></div>
+          <div class="dev-service"><div class="icon">⚙️</div><h3>Backend</h3><p>APIs robustas com Node.js.</p></div>
+        </div>
+        <div class="dev-contact">
+          <a href="https://www.instagram.com/lithuanstudio/" target="_blank" rel="noopener">📱 @lithuan.studio</a>
+          <a href="https://www.lithuanstudio.com.br/" target="_blank" rel="noopener">🌐 lithuan.studio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 🔗 FOOTER -->
   <footer>
-    <div class="wrap">© <span id="ano"></span> Dente da Traíra · Desenvolvido por <strong>Lithuan Studio</strong></div>
+    <div class="wrap footer-inner">
+
+      <!-- Linha principal -->
+      <div class="footer-main">
+        <span class="footer-copy">© <span id="ano"></span> Dente da Traíra</span>
+        <span class="footer-sep">·</span>
+        <span class="footer-dev-label">Desenvolvido por</span>
+        <a class="footer-dev-brand" href="https://www.lithuanstudio.com.br/" target="_blank" rel="noopener">
+          <img src="assets/lithuan-logo.png" alt="Lithuan Studio" class="footer-dev-logo" />
+          <span>Lithuan Studio</span>
+        </a>
+      </div>
+
+      <!-- Links rápidos da agência -->
+      <div class="footer-dev-links">
+        <a href="https://www.lithuanstudio.com.br/" target="_blank" rel="noopener" class="footer-link-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          lithuanstudio.com.br
+        </a>
+        <a href="https://www.instagram.com/lithuanstudio/" target="_blank" rel="noopener" class="footer-link-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          @lithuan.studio
+        </a>
+      </div>
+
+    </div>
   </footer>
 
   <!-- ⚙️ JavaScript do site -->
