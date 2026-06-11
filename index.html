@@ -27,7 +27,6 @@
       <nav class="menu" id="menu">
         <a href="#sobre">História</a>
         <a href="#metricas">Métricas</a>
-        <a href="#time">Time</a>
         <a href="#criadouro">Criadouro</a>
         <a href="#parceiros">Parceiros</a>
         <a href="#loja">Loja</a>
@@ -169,24 +168,7 @@
   </section>
 
   <!-- ==========================================
-       👥 TIME - Equipe
-       ========================================== -->
-  <section id="time" class="alt">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="kicker">Quem está junto</span>
-        <h2>O time de pesca</h2>
-      </div>
-      <div class="cards grid-3">
-        <div class="card reveal"><div class="icon">🎣</div><h3>Matheus Alexandre</h3><p>Fundador, pescador e criador de todo o conteúdo.</p></div>
-        <div class="card reveal"><div class="icon">🎥</div><h3>Captação & Edição</h3><p>Responsáveis por transformar cada expedição em conteúdo visual.</p></div>
-        <div class="card reveal"><div class="icon">🐟</div><h3>Manejo & Criadouro</h3><p>Cuidado diário com as espécies — alimentação e saúde.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       🐠 CRIADOURO - Galeria
+       🐠 CRIADOURO - Carrossel de fotos
        ========================================== -->
   <section id="criadouro">
     <div class="wrap">
@@ -194,12 +176,18 @@
         <span class="kicker">O lugar onde tudo vive</span>
         <h2>Um ecossistema vivo com 38+ espécies</h2>
       </div>
-      <div class="gallery">
-        <img src="assets/pacugrande.png" alt="Pacu" style="border-radius:14px;width:100%;height:100%;object-fit:cover;" class="reveal" />
-        <div class="tile reveal">🐟 Pirarara</div>
-        <div class="tile reveal">🎣 Tucunaré</div>
-        <div class="tile reveal">🐡 Tanque 01</div>
+      <div class="carrossel-container">
+        <button class="carrossel-btn prev" id="btnPrev" onclick="mudarFoto(-1)">‹</button>
+        <div class="carrossel-main">
+          <img id="carrosselImg" src="assets/pacugrande.png" alt="Ecossistema" class="reveal" />
+          <div class="carrossel-info">
+            <span class="carrossel-titulo" id="carrosselTitulo">Pacu Grande</span>
+            <span class="carrossel-contador"><span id="contadorAtual">1</span> / <span id="contadorTotal">8</span></span>
+          </div>
+        </div>
+        <button class="carrossel-btn next" id="btnNext" onclick="mudarFoto(1)">›</button>
       </div>
+      <div class="carrossel-dots" id="carrosselDots"></div>
     </div>
   </section>
 
