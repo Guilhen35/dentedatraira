@@ -22,6 +22,97 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') fecharDevSection();
 });
 
+// =============================================
+// 📸 CARROSSEL — Fotos do ecossistema
+// =============================================
+function carregarCarrossel() {
+  var salvo = localStorage.getItem('carrosselFotos');
+  return salvo ? JSON.parse(salvo) : [
+    { src: 'assets/001.png', titulo: 'Ecossistema 01' },
+    { src: 'assets/002.png', titulo: 'Ecossistema 02' },
+    { src: 'assets/003.png', titulo: 'Ecossistema 03' },
+    { src: 'assets/004.png', titulo: 'Ecossistema 04' },
+    { src: 'assets/005.png', titulo: 'Ecossistema 05' },
+    { src: 'assets/006.png', titulo: 'Ecossistema 06' },
+    { src: 'assets/007.png', titulo: 'Ecossistema 07' },
+    { src: 'assets/008.png', titulo: 'Ecossistema 08' }
+  ];
+}
+
+var carrosselIndex = 0;
+var carrosselFotos = carregarCarrossel();
+
+function renderCarrossel() {
+  carrosselFotos = carregarCarrossel();
+  if (carrosselFotos.length === 0) return;
+  
+  var foto = carrosselFotos[carrosselIndex];
+  document.getElementById('carrosselImg').src = foto.src;
+  document.getElementById('carrosselImg').alt = foto.titulo;
+  document.getElementById('carrosselTitulo').textContent = foto.titulo;
+  document.getElementById('contadorAtual').textContent = carrosselIndex + 1;
+  document.getElementById('contadorTotal').textContent = carrosselFotos.length;
+  
+  // Atualiza dots
+  var dots = document.querySelectorAll('.carrossel-dot');
+  dots.forEach(function(d, i) {
+    d.classList.toggle('active', i === carrosselIndex);
+  });
+}
+
+function mudarFoto(direcao) {
+  carrosselIndex += direcao;
+  if (carrosselIndex < 0) carrosselIndex = carrosselFotos.length - 1;
+  if (carrosselIndex >= carrosselFotos.length) carrosselIndex = 0;
+  renderCarrossel();
+}
+
+function irParaFoto(index) {
+  carrosselIndex = index;
+  renderCarrossel();
+}
+
+function criarDots() {
+  var container = document.getElementById('carrosselDots');
+  if (!container) return;
+  carrosselFotos = carregarCarrossel();
+  container.innerHTML = carrosselFotos.map(function(_, i) {
+    return '<div class="carrossel-dot' + (i === 0 ? ' active' : '') + '" onclick="irParaFoto(' + i + ')"></div>';
+  }).join('');
+}
+
+// Inicializa carrossel
+window.addEventListener('load', function() {
+  criarDots();
+  renderCarrossel();
+  iniciarAutoPlay();
+});
+
+// Auto-play a cada 5 segundos
+var autoPlayInterval;
+function iniciarAutoPlay() {
+  autoPlayInterval = setInterval(function() {
+    mudarFoto(1);
+  }, 2000); // 5000 = 5 segundos
+}
+
+// Para o auto-play quando o usuário clica nas setas
+function mudarFoto(direcao) {
+  clearInterval(autoPlayInterval);
+  carrosselIndex += direcao;
+  if (carrosselIndex < 0) carrosselIndex = carrosselFotos.length - 1;
+  if (carrosselIndex >= carrosselFotos.length) carrosselIndex = 0;
+  renderCarrossel();
+  iniciarAutoPlay(); // Reinicia auto-play após 5 segundos
+}
+
+function irParaFoto(index) {
+  clearInterval(autoPlayInterval);
+  carrosselIndex = index;
+  renderCarrossel();
+  iniciarAutoPlay();
+}
+
 // ---- MENU MOBILE ----
 const burger = document.getElementById('burger');
 const menu   = document.getElementById('menu');
