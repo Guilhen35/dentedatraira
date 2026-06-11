@@ -6,35 +6,47 @@
   <title>Admin · Dente da Traíra</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:'Segoe UI',sans-serif;background:#1a1a1a;color:#e7f3f1;padding:20px;min-height:100vh;}
-    .container{max-width:1100px;margin:0 auto;}
+    body{font-family:'Segoe UI',sans-serif;background:#04100f;color:#e7f3f1;padding:20px;min-height:100vh;cursor:default;}
+    .container{max-width:900px;margin:0 auto;}
     header{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;border-bottom:2px solid #1fe3c2;padding-bottom:20px;flex-wrap:wrap;gap:12px;}
-    h1{font-size:1.8rem;color:#1fe3c2;}
+    h1{font-size:1.6rem;color:#1fe3c2;font-weight:700;}
     .header-btns{display:flex;gap:10px;}
-    .btn-voltar{background:#f0b53d;color:#1a1a1a;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.3s;}
+    .btn-voltar{background:#f0b53d;color:#04100f;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.2s;font-size:.9rem;}
     .btn-voltar:hover{background:#e0a32d;transform:translateY(-2px);}
-    .btn-logout{background:#ff6b6b;color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:700;transition:.3s;}
-    .btn-logout:hover{background:#ff5252;transform:translateY(-2px);}
-    .card{background:#2a2a2a;border:2px solid #1fe3c2;border-radius:12px;padding:28px;margin-bottom:24px;}
-    .card h2{color:#1fe3c2;margin-bottom:18px;font-size:1.3rem;}
-    .info{background:rgba(31,227,194,.1);border-left:4px solid #1fe3c2;padding:12px 16px;margin-bottom:18px;border-radius:6px;font-size:.9rem;color:#1fe3c2;}
-    .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;}
-    label{display:block;margin-bottom:6px;font-weight:700;color:#1fe3c2;font-size:.9rem;}
-    input{width:100%;padding:11px;background:#1a1a1a;border:2px solid #1fe3c2;color:#e7f3f1;border-radius:6px;font-size:1rem;transition:.3s;}
-    input:focus{outline:none;border-color:#f0b53d;box-shadow:0 0 10px rgba(31,227,194,.2);}
-    .rede-box{background:#1a1a1a;border:2px solid #0c2226;border-radius:8px;padding:14px;margin-bottom:14px;}
-    .rede-box h3{color:#1fe3c2;margin-bottom:12px;font-size:1rem;}
-    .btn-salvar{width:100%;padding:14px;background:#1fe3c2;color:#1a1a1a;border:none;border-radius:8px;font-weight:700;font-size:1.1rem;cursor:pointer;transition:.3s;margin-top:8px;}
-    .btn-salvar:hover{background:#0dd5b6;transform:translateY(-2px);box-shadow:0 5px 15px rgba(31,227,194,.3);}
-    .sucesso{background:#1fe3c2;color:#1a1a1a;padding:14px;border-radius:8px;font-weight:700;margin-bottom:16px;display:none;animation:fadeIn .3s ease;}
+    .btn-logout{background:transparent;color:#ff6b6b;border:1px solid #ff6b6b;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:700;transition:.2s;font-size:.9rem;}
+    .btn-logout:hover{background:rgba(255,107,107,.1);transform:translateY(-2px);}
+    .card{background:#0c2226;border:1px solid rgba(31,227,194,.25);border-radius:14px;padding:28px;margin-bottom:20px;}
+    .card h2{color:#1fe3c2;margin-bottom:18px;font-size:1.15rem;font-weight:700;}
+    .info{background:rgba(31,227,194,.08);border-left:3px solid #1fe3c2;padding:10px 14px;margin-bottom:18px;border-radius:0 6px 6px 0;font-size:.85rem;color:#8aa3a3;}
+    .rede-box{background:#07191a;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px;margin-bottom:12px;}
+    .rede-box h3{color:#e7f3f1;margin-bottom:12px;font-size:.95rem;font-weight:600;display:flex;align-items:center;gap:8px;}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px;}
+    label{display:block;margin-bottom:5px;font-weight:600;color:#8aa3a3;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;}
+    input, select{width:100%;padding:10px 12px;background:#04100f;border:1px solid rgba(31,227,194,.3);color:#e7f3f1;border-radius:8px;font-size:.95rem;transition:.2s;cursor:text;font-family:'Segoe UI',sans-serif;}
+    select{cursor:pointer;}
+    input:focus, select:focus{outline:none;border-color:#1fe3c2;background:#071510;}
+    .btn-salvar{width:100%;padding:13px;background:#1fe3c2;color:#04100f;border:none;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:.2s;margin-top:12px;}
+    .btn-salvar:hover{background:#0dd5b6;transform:translateY(-2px);}
+    .btn-add{width:100%;padding:11px;background:transparent;border:1px dashed rgba(31,227,194,.4);color:#1fe3c2;border-radius:8px;font-size:.9rem;cursor:pointer;font-family:'Segoe UI',sans-serif;transition:.2s;margin-top:4px;}
+    .btn-add:hover{background:rgba(31,227,194,.08);border-color:#1fe3c2;}
+    .btn-remover{padding:9px 14px;background:transparent;border:1px solid rgba(255,100,100,.3);color:#ff6b6b;border-radius:8px;cursor:pointer;font-size:.85rem;white-space:nowrap;transition:.2s;font-family:'Segoe UI',sans-serif;}
+    .btn-remover:hover{background:rgba(255,107,107,.1);}
+    .sucesso{background:rgba(31,227,194,.15);border:1px solid #1fe3c2;color:#1fe3c2;padding:12px 16px;border-radius:8px;font-weight:600;margin-bottom:16px;display:none;font-size:.9rem;}
     .sucesso.show{display:block;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:center;justify-content:center;z-index:100;}
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);align-items:center;justify-content:center;z-index:100;}
     .modal.show{display:flex;}
-    .modal-box{background:#2a2a2a;padding:32px;border-radius:12px;border:2px solid #1fe3c2;max-width:380px;width:90%;}
-    .modal-box h2{color:#1fe3c2;margin-bottom:20px;}
-    .modal-box p{color:#8aa3a3;font-size:.85rem;text-align:center;margin-top:10px;}
-    @media(max-width:680px){.row{grid-template-columns:1fr;}}
+    .modal-box{background:#0c2226;padding:36px;border-radius:14px;border:1px solid rgba(31,227,194,.4);max-width:360px;width:90%;}
+    .modal-box h2{color:#1fe3c2;margin-bottom:6px;font-size:1.3rem;}
+    .modal-box p{color:#8aa3a3;font-size:.82rem;margin-top:10px;text-align:center;}
+    .modal-box p strong{color:#f0b53d;}
+    .total-preview{background:#07191a;border:1px solid rgba(31,227,194,.2);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;}
+    .total-preview span{font-size:.8rem;color:#8aa3a3;}
+    .total-preview strong{font-size:1.2rem;color:#1fe3c2;font-weight:700;}
+    .video-item{background:#07191a;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px;margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;}
+    .video-item input, .video-item select{width:100%;padding:9px 12px;background:#04100f;border:1px solid rgba(31,227,194,.3);color:#e7f3f1;border-radius:8px;font-size:.88rem;transition:.2s;cursor:text;}
+    .video-item select{cursor:pointer;}
+    .video-item input:focus, .video-item select:focus{outline:none;border-color:#1fe3c2;}
+    @media(max-width:680px){.row{grid-template-columns:1fr;}.video-item{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -52,8 +64,8 @@
   <div class="modal show" id="modalLogin">
     <div class="modal-box">
       <h2>🔐 Entrar no Admin</h2>
-      <div style="margin-bottom:16px;">
-        <label>Senha:</label>
+      <div style="margin:20px 0 16px;">
+        <label>Senha</label>
         <input type="password" id="senhaInput" placeholder="Digite a senha" autofocus />
       </div>
       <button class="btn-salvar" onclick="login()">Entrar</button>
@@ -64,58 +76,81 @@
   <!-- CONTEÚDO ADMIN -->
   <div id="conteudo" style="display:none;">
 
-    <!-- MÉTRICAS -->
     <div class="card">
       <h2>📊 Métricas — Redes Sociais</h2>
-      <div class="info">💡 Edite os números e clique em Salvar. O site atualiza automaticamente!</div>
-      <div class="sucesso" id="msg">✅ Salvo com sucesso!</div>
+      <div class="info">Edite os números e clique em Salvar. O site atualiza automaticamente.</div>
+      <div class="sucesso" id="msg">✅ Salvo com sucesso! Abra o site para ver as alterações.</div>
 
       <div class="rede-box">
         <h3>📸 Instagram</h3>
         <div class="row">
-          <div><label>Seguidores</label><input type="number" id="ig-num" value="363000" /></div>
-          <div><label>Emoji</label><input type="text" id="ig-icon" value="📸" maxlength="2" /></div>
-          <div><label>Label</label><input type="text" id="ig-label" value="Seguidores" /></div>
+          <div><label>Seguidores</label><input type="number" id="ig-num" value="363000" oninput="atualizarTotal()" /></div>
+          <div><label>Link do perfil</label><input type="text" id="ig-link" value="https://www.instagram.com/dentedatraira/" /></div>
+        </div>
+      </div>
+
+      <div class="rede-box">
+        <h3>📘 Facebook</h3>
+        <div class="row">
+          <div><label>Seguidores</label><input type="number" id="fb-num" value="872" oninput="atualizarTotal()" /></div>
+          <div><label>Link do perfil</label><input type="text" id="fb-link" value="https://www.facebook.com/dentedatraira" /></div>
         </div>
       </div>
 
       <div class="rede-box">
         <h3>📺 YouTube</h3>
         <div class="row">
-          <div><label>Inscritos</label><input type="number" id="yt-num" value="202000" /></div>
-          <div><label>Emoji</label><input type="text" id="yt-icon" value="📺" maxlength="2" /></div>
-          <div><label>Label</label><input type="text" id="yt-label" value="Inscritos" /></div>
+          <div><label>Inscritos</label><input type="number" id="yt-num" value="200000" oninput="atualizarTotal()" /></div>
+          <div><label>Link do canal</label><input type="text" id="yt-link" value="https://www.youtube.com/@dentedatraira" /></div>
         </div>
       </div>
 
       <div class="rede-box">
         <h3>🎵 TikTok</h3>
         <div class="row">
-          <div><label>Seguidores</label><input type="number" id="tt-num" value="923500" /></div>
-          <div><label>Emoji</label><input type="text" id="tt-icon" value="🎵" maxlength="2" /></div>
-          <div><label>Label</label><input type="text" id="tt-label" value="Seguidores" /></div>
+          <div><label>Seguidores</label><input type="number" id="tt-num" value="229000" oninput="atualizarTotal()" /></div>
+          <div><label>Link do perfil</label><input type="text" id="tt-link" value="https://www.tiktok.com/@dentedatraira" /></div>
         </div>
       </div>
 
-      <button class="btn-salvar" onclick="salvarMetricas()">💾 Salvar Métricas</button>
+      <div class="total-preview">
+        <span>Total que aparece no site:</span>
+        <strong id="totalPreview">792.872</strong>
+      </div>
+
+      <button class="btn-salvar" onclick="salvarMetricas()">💾 Salvar todas as métricas</button>
     </div>
 
-    <!-- PARCEIROS (em breve) -->
+    <div class="card">
+      <h2>🛍️ Loja — Produtos Afiliados</h2>
+      <div class="info">Adicione quantos produtos quiser. Cole o link de afiliado e o visitante é redirecionado ao clicar em "Comprar agora".</div>
+      <div class="sucesso" id="msg-loja">✅ Produtos salvos com sucesso!</div>
+      <div id="loja-lista"></div>
+      <button class="btn-add" onclick="adicionarProduto()">+ Adicionar produto</button>
+      <button class="btn-salvar" onclick="salvarLoja()" style="margin-top:10px;">💾 Salvar produtos</button>
+    </div>
+
+    <div class="card">
+      <h2>🎬 Vídeos em Destaque</h2>
+      <div class="info">Cole o link do post ou reel do Instagram. O visitante clica no card e abre direto no Instagram.</div>
+      <div class="sucesso" id="msg-videos">✅ Vídeos salvos com sucesso!</div>
+      <div id="videos-lista"></div>
+      <button class="btn-add" onclick="adicionarVideo()">+ Adicionar vídeo</button>
+      <button class="btn-salvar" onclick="salvarVideos()" style="margin-top:10px;">💾 Salvar vídeos</button>
+    </div>
+
+    <div class="card">
+      <h2>📸 Carrossel — Fotos do Ecossistema</h2>
+      <div class="info">Adicione as fotos do seu criadouro. O site mostra uma por vez com navegação de setas e pontos.</div>
+      <div class="sucesso" id="msg-carrossel">✅ Fotos salvas com sucesso!</div>
+      <div id="carrossel-lista"></div>
+      <button class="btn-add" onclick="adicionarFotoCarrossel()">+ Adicionar foto</button>
+      <button class="btn-salvar" onclick="salvarCarrossel()" style="margin-top:10px;">💾 Salvar fotos</button>
+    </div>
+
     <div class="card">
       <h2>🤝 Parceiros</h2>
-      <div class="info">🔧 Em breve: adicionar e editar parceiros aqui!</div>
-    </div>
-
-    <!-- LOJA (em breve) -->
-    <div class="card">
-      <h2>🛍️ Loja</h2>
-      <div class="info">🔧 Em breve: adicionar e editar produtos aqui!</div>
-    </div>
-
-    <!-- VÍDEOS (em breve) -->
-    <div class="card">
-      <h2>🎬 Vídeos</h2>
-      <div class="info">🔧 Em breve: adicionar e editar vídeos aqui!</div>
+      <div class="info">Em breve: adicionar e editar parceiros diretamente aqui.</div>
     </div>
 
   </div>
@@ -124,14 +159,33 @@
 <script>
   const SENHA = 'admin123';
 
+  function fmt(n) {
+    var num = parseInt(n) || 0;
+    if (num >= 1000000) return (num/1000000).toFixed(1).replace('.',',') + ' M';
+    if (num >= 1000)    return (num/1000).toFixed(0) + ' k';
+    return num.toLocaleString('pt-BR');
+  }
+
+  function atualizarTotal() {
+    var ig = parseInt(document.getElementById('ig-num').value) || 0;
+    var fb = parseInt(document.getElementById('fb-num').value) || 0;
+    var yt = parseInt(document.getElementById('yt-num').value) || 0;
+    var tt = parseInt(document.getElementById('tt-num').value) || 0;
+    document.getElementById('totalPreview').textContent = fmt(ig + fb + yt + tt);
+  }
+
   function login() {
-    if (document.getElementById('senhaInput').value === SENHA) {
+    var senhaDigitada = document.getElementById('senhaInput').value;
+    if (senhaDigitada === SENHA) {
       localStorage.setItem('adminOk', '1');
       document.getElementById('modalLogin').classList.remove('show');
       document.getElementById('conteudo').style.display = 'block';
       carregarValores();
+      carregarCarrosselAdmin();
+      carregarLojaAdmin();
+      carregarVideosAdmin();
     } else {
-      alert('❌ Senha incorreta!');
+      alert('Senha incorreta!');
       document.getElementById('senhaInput').value = '';
       document.getElementById('senhaInput').focus();
     }
@@ -142,37 +196,253 @@
     location.reload();
   }
 
-  document.getElementById('senhaInput').addEventListener('keypress', e => {
+  document.getElementById('senhaInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') login();
   });
 
-  window.addEventListener('load', () => {
+  window.addEventListener('load', function() {
     if (localStorage.getItem('adminOk') === '1') {
       document.getElementById('modalLogin').classList.remove('show');
       document.getElementById('conteudo').style.display = 'block';
       carregarValores();
+      carregarCarrosselAdmin();
+      carregarLojaAdmin();
+      carregarVideosAdmin();
     }
   });
 
   function carregarValores() {
-    const salvo = localStorage.getItem('redeSocial');
-    if (!salvo) return;
-    const redes = JSON.parse(salvo);
-    if (redes[0]) { document.getElementById('ig-num').value = redes[0].numero; document.getElementById('ig-icon').value = redes[0].icon; document.getElementById('ig-label').value = redes[0].label; }
-    if (redes[1]) { document.getElementById('yt-num').value = redes[1].numero; document.getElementById('yt-icon').value = redes[1].icon; document.getElementById('yt-label').value = redes[1].label; }
-    if (redes[2]) { document.getElementById('tt-num').value = redes[2].numero; document.getElementById('tt-icon').value = redes[2].icon; document.getElementById('tt-label').value = redes[2].label; }
+    var salvo = localStorage.getItem('redeSocial');
+    if (!salvo) { atualizarTotal(); return; }
+    var redes = JSON.parse(salvo);
+    if (redes[0]) { document.getElementById('ig-num').value = redes[0].numero; if(redes[0].link) document.getElementById('ig-link').value = redes[0].link; }
+    if (redes[1]) { document.getElementById('fb-num').value = redes[1].numero; if(redes[1].link) document.getElementById('fb-link').value = redes[1].link; }
+    if (redes[2]) { document.getElementById('yt-num').value = redes[2].numero; if(redes[2].link) document.getElementById('yt-link').value = redes[2].link; }
+    if (redes[3]) { document.getElementById('tt-num').value = redes[3].numero; if(redes[3].link) document.getElementById('tt-link').value = redes[3].link; }
+    atualizarTotal();
   }
 
   function salvarMetricas() {
-    const redes = [
-      { icon: document.getElementById('ig-icon').value, numero: parseInt(document.getElementById('ig-num').value), label: document.getElementById('ig-label').value, plataforma: 'Instagram', link: 'https://www.instagram.com/dentedatraira/' },
-      { icon: document.getElementById('yt-icon').value, numero: parseInt(document.getElementById('yt-num').value), label: document.getElementById('yt-label').value, plataforma: 'YouTube',   link: 'https://www.youtube.com/@dentedatraira' },
-      { icon: document.getElementById('tt-icon').value, numero: parseInt(document.getElementById('tt-num').value), label: document.getElementById('tt-label').value, plataforma: 'TikTok',    link: 'https://www.tiktok.com/@matheusalexandre_' }
+    var redes = [
+      { plataforma: 'Instagram', numero: parseInt(document.getElementById('ig-num').value)||0, label: 'Seguidores', link: document.getElementById('ig-link').value },
+      { plataforma: 'Facebook',  numero: parseInt(document.getElementById('fb-num').value)||0, label: 'Seguidores', link: document.getElementById('fb-link').value },
+      { plataforma: 'YouTube',   numero: parseInt(document.getElementById('yt-num').value)||0, label: 'Inscritos',  link: document.getElementById('yt-link').value },
+      { plataforma: 'TikTok',    numero: parseInt(document.getElementById('tt-num').value)||0, label: 'Seguidores', link: document.getElementById('tt-link').value }
     ];
     localStorage.setItem('redeSocial', JSON.stringify(redes));
-    const msg = document.getElementById('msg');
+    var msg = document.getElementById('msg');
     msg.classList.add('show');
-    setTimeout(() => msg.classList.remove('show'), 3000);
+    setTimeout(function() { msg.classList.remove('show'); }, 3000);
+  }
+
+  // =============================================
+  // 📸 CARROSSEL
+  // =============================================
+  function renderCarrosselAdmin(lista) {
+    var container = document.getElementById('carrossel-lista');
+    if (!lista || lista.length === 0) {
+      container.innerHTML = '<p style="color:#5a8870;font-size:.85rem;padding:8px 0;">Nenhuma foto adicionada ainda.</p>';
+      return;
+    }
+    container.innerHTML = lista.map(function(f, i) {
+      return '<div class="video-item" id="ci-' + i + '" style="grid-template-columns:1fr 1fr auto">' +
+        '<div><label>Título da foto</label><input type="text" id="ct-' + i + '" value="' + f.titulo + '" placeholder="Ex: Tanque 01" /></div>' +
+        '<div><label>Caminho da imagem</label><input type="text" id="cs-' + i + '" value="' + f.src + '" placeholder="assets/foto.png" /></div>' +
+        '<button class="btn-remover" onclick="removerFotoCarrossel(' + i + ')" style="align-self:end">✕ Remover</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function carregarCarrosselAdmin() {
+    var salvo = localStorage.getItem('carrosselFotos');
+    var lista = salvo ? JSON.parse(salvo) : [
+      { src: 'assets/pacugrande.png', titulo: 'Pacu Grande' },
+      { src: 'assets/peixegrande.png', titulo: 'Peixe Grande' },
+      { src: 'assets/pacugrande.png', titulo: 'Tanque 01' },
+      { src: 'assets/peixegrande.png', titulo: 'Tanque 02' },
+      { src: 'assets/pacugrande.png', titulo: 'Tanque 03' },
+      { src: 'assets/peixegrande.png', titulo: 'Tanque 04' },
+      { src: 'assets/pacugrande.png', titulo: 'Tanque 05' },
+      { src: 'assets/peixegrande.png', titulo: 'Tanque 06' }
+    ];
+    renderCarrosselAdmin(lista);
+  }
+
+  function adicionarFotoCarrossel() {
+    var lista = coletarFotosCarrossel();
+    lista.push({ src: 'assets/pacugrande.png', titulo: '' });
+    renderCarrosselAdmin(lista);
+  }
+
+  function removerFotoCarrossel(i) {
+    var lista = coletarFotosCarrossel();
+    lista.splice(i, 1);
+    renderCarrosselAdmin(lista);
+  }
+
+  function coletarFotosCarrossel() {
+    var lista = [];
+    var items = document.querySelectorAll('#carrossel-lista .video-item');
+    items.forEach(function(_, i) {
+      var titulo = document.getElementById('ct-' + i);
+      var src    = document.getElementById('cs-' + i);
+      if (titulo && src) {
+        lista.push({ src: src.value, titulo: titulo.value });
+      }
+    });
+    return lista;
+  }
+
+  function salvarCarrossel() {
+    var lista = coletarFotosCarrossel();
+    localStorage.setItem('carrosselFotos', JSON.stringify(lista));
+    var msg = document.getElementById('msg-carrossel');
+    msg.classList.add('show');
+    setTimeout(function() { msg.classList.remove('show'); }, 3000);
+  }
+
+  // =============================================
+  // 🛍️ LOJA
+  // =============================================
+  var CATEGORIAS = ['Vestuário','Equipamento','Acessório','Isca','Eletrônico','Outro'];
+  var EMOJIS     = ['👕','🎣','🪝','🐟','📱','⭐'];
+
+  function renderLojaAdmin(lista) {
+    var container = document.getElementById('loja-lista');
+    if (!lista || lista.length === 0) {
+      container.innerHTML = '<p style="color:#5a8870;font-size:.85rem;padding:8px 0;">Nenhum produto adicionado ainda.</p>';
+      return;
+    }
+    container.innerHTML = lista.map(function(p, i) {
+      var catOpts = CATEGORIAS.map(function(c) {
+        return '<option value="' + c + '"' + (p.tag === c ? ' selected' : '') + '>' + c + '</option>';
+      }).join('');
+      var emojiOpts = EMOJIS.map(function(e) {
+        return '<option value="' + e + '"' + (p.emoji === e ? ' selected' : '') + '>' + e + '</option>';
+      }).join('');
+      return '<div class="video-item" id="pi-' + i + '" style="grid-template-columns:auto 1fr 1fr auto">' +
+        '<div><label>Emoji</label><select id="pe-' + i + '" style="width:70px;text-align:center;">' + emojiOpts + '</select></div>' +
+        '<div><label>Categoria</label><select id="pc-' + i + '">' + catOpts + '</select></div>' +
+        '<div><label>Nome do produto</label><input type="text" id="pn-' + i + '" value="' + p.titulo + '" placeholder="Ex: Vara Albatroz Pro" /></div>' +
+        '<div><label>Descrição curta</label><input type="text" id="pd-' + i + '" value="' + p.desc + '" placeholder="Ex: Vara de ação pesada" /></div>' +
+        '<div style="grid-column:2/-1"><label>Link do afiliado</label><input type="text" id="pl-' + i + '" value="' + p.link + '" placeholder="https://..." /></div>' +
+        '<button class="btn-remover" onclick="removerProduto(' + i + ')" style="align-self:end">✕ Remover</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function carregarLojaAdmin() {
+    var salvo = localStorage.getItem('lojaProdutos');
+    var lista = salvo ? JSON.parse(salvo) : [
+      { tag: 'Vestuário',   titulo: 'Camiseta UV Koi', desc: 'Proteção solar UV50+', emoji: '👕', link: 'https://www.instagram.com/koifishingwear/' },
+      { tag: 'Equipamento', titulo: 'Vara Albatroz',   desc: 'Vara de ação pesada',  emoji: '🎣', link: 'https://www.instagram.com/albatrozfishing/' },
+      { tag: 'Acessório',   titulo: 'Kit de Iscas',    desc: 'Seleção testada',      emoji: '🪝', link: '#' }
+    ];
+    renderLojaAdmin(lista);
+  }
+
+  function adicionarProduto() {
+    var lista = coletarProdutos();
+    lista.push({ tag: 'Equipamento', titulo: '', desc: '', emoji: '🎣', link: '' });
+    renderLojaAdmin(lista);
+  }
+
+  function removerProduto(i) {
+    var lista = coletarProdutos();
+    lista.splice(i, 1);
+    renderLojaAdmin(lista);
+  }
+
+  function coletarProdutos() {
+    var lista = [];
+    var items = document.querySelectorAll('#loja-lista .video-item');
+    items.forEach(function(_, i) {
+      var emoji = document.getElementById('pe-' + i);
+      var cat   = document.getElementById('pc-' + i);
+      var nome  = document.getElementById('pn-' + i);
+      var desc  = document.getElementById('pd-' + i);
+      var link  = document.getElementById('pl-' + i);
+      if (nome && link) {
+        lista.push({ tag: cat ? cat.value : 'Equipamento', titulo: nome.value, desc: desc ? desc.value : '', emoji: emoji ? emoji.value : '🎣', link: link.value });
+      }
+    });
+    return lista;
+  }
+
+  function salvarLoja() {
+    var lista = coletarProdutos();
+    localStorage.setItem('lojaProdutos', JSON.stringify(lista));
+    var msg = document.getElementById('msg-loja');
+    msg.classList.add('show');
+    setTimeout(function() { msg.classList.remove('show'); }, 3000);
+  }
+
+  // =============================================
+  // 🎬 VÍDEOS
+  // =============================================
+  var SECOES = ['Sorteio', 'Promoção', 'Destaque', 'Novidade', 'Parceiro'];
+
+  function renderVideosAdmin(lista) {
+    var container = document.getElementById('videos-lista');
+    if (!lista || lista.length === 0) {
+      container.innerHTML = '<p style="color:#5a8870;font-size:.85rem;padding:8px 0;">Nenhum vídeo adicionado ainda.</p>';
+      return;
+    }
+    container.innerHTML = lista.map(function(v, i) {
+      var opts = SECOES.map(function(s) {
+        return '<option value="' + s + '"' + (v.secao === s ? ' selected' : '') + '>' + s + '</option>';
+      }).join('');
+      return '<div class="video-item" id="vi-' + i + '">' +
+        '<div><label>Seção</label><select id="vs-' + i + '">' + opts + '</select></div>' +
+        '<div><label>Título</label><input type="text" id="vt-' + i + '" value="' + v.titulo + '" placeholder="Ex: Pesca de Pirarara" /></div>' +
+        '<div><label>Link do Instagram</label><input type="text" id="vl-' + i + '" value="' + v.url + '" placeholder="https://www.instagram.com/reel/..." /></div>' +
+        '<button class="btn-remover" onclick="removerVideo(' + i + ')">✕ Remover</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function carregarVideosAdmin() {
+    var salvo = localStorage.getItem('videosDestaque');
+    var lista = salvo ? JSON.parse(salvo) : [
+      { secao: 'Sorteio',  titulo: 'Sorteio de vara nova', url: 'https://www.instagram.com/reel/exemplo1/' },
+      { secao: 'Promoção', titulo: 'Cupom dos parceiros',  url: 'https://www.instagram.com/reel/exemplo2/' },
+      { secao: 'Destaque', titulo: 'Pirarara gigante',     url: 'https://www.instagram.com/reel/exemplo3/' }
+    ];
+    renderVideosAdmin(lista);
+  }
+
+  function adicionarVideo() {
+    var lista = coletarVideos();
+    lista.push({ secao: 'Destaque', titulo: '', url: '' });
+    renderVideosAdmin(lista);
+  }
+
+  function removerVideo(i) {
+    var lista = coletarVideos();
+    lista.splice(i, 1);
+    renderVideosAdmin(lista);
+  }
+
+  function coletarVideos() {
+    var lista = [];
+    var items = document.querySelectorAll('#videos-lista .video-item');
+    items.forEach(function(_, i) {
+      var secao = document.getElementById('vs-' + i);
+      var titulo = document.getElementById('vt-' + i);
+      var url    = document.getElementById('vl-' + i);
+      if (secao && titulo && url) {
+        lista.push({ secao: secao.value, titulo: titulo.value, url: url.value });
+      }
+    });
+    return lista;
+  }
+
+  function salvarVideos() {
+    var lista = coletarVideos();
+    localStorage.setItem('videosDestaque', JSON.stringify(lista));
+    var msg = document.getElementById('msg-videos');
+    msg.classList.add('show');
+    setTimeout(function() { msg.classList.remove('show'); }, 3000);
   }
 </script>
 </body>
