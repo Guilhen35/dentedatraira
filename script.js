@@ -272,9 +272,9 @@ if (scrollHint) {
 // =============================================
 const PATROCINADORES = [
   {
-    nome: 'Koi Fishing Wear',
-    logo: 'assets/koi-logo.png',
-    link: 'https://www.instagram.com/koifishingwear/'
+    nome: 'Fishermans',
+    logo: 'assets/fishermans-logo.png',
+    link: 'https://fishermans.com.br/'
   },
   {
     nome: 'Albatroz Fishing',
